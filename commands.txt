@@ -1,0 +1,15 @@
+To start a persistent terminal session use:
+
+    tmux
+
+To start the server use:
+    
+    node server.js
+
+To search for the process ID use:
+
+    ps -ax | grep node
+
+To manually kill the process:
+    
+    kill <PROCESSID>
