@@ -35,21 +35,28 @@ playerAidDivContent.innerHTML = `
 <ul>
   <li>Everyone takes 1 gold for each of their bonds</li>
   <li>Put 1 active stock in the market.</li>
-  <li>Put one more stock for each more powerful company</li>
   <ul>
     <li>Put one more stock for each more powerful company</li>
   </ul>
   <li>If there is a tie for the highest bid</li>
   <ul>
-    <li>Everyone takes one stock</li>
+    <li>Highest bidders pay 1 gold</li>
     <li>Start the next round</li>
   </ul>
-  <li>Highest bidder places a unit or prisoner from active company</li>
+  <li>Middle bidders take stock from company and pay lowest bid</li>
+  <li>Highest bidder either places a unit or moves a unit</li>
+  <ul>
+    <li>Place units or prisoners from the active company</li>
+    <li>If you move a unit, trash 1 unit from the active company</li>
+    <li>Move to neighboring locations: land to land or sea to sea</li>
+  </ul>
   <li>A group is surrounded if it does not neighbor any open node</li>
   <li>Attack: Active company takes surrounded units prisoner</li>
+  <ul>
+    <li>If units are captured, everyone takes 1 bond</li>
+  </ul>
   <li>Retreat: Active company's surrounded units go to trash</li>
-  <li>Middle bidders take stock from the company</li>
-  <li>Highest bidder takes stock from the market</li>
+  <li>Highest bidder takes stock from market and pays own bid</li>
   <li>All but the lowest bidders pay the lowest bid</li>
   <li>Then, the game ends if any company has</li>
   <ul>

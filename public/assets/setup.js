@@ -1,4 +1,4 @@
-var numPlayers = 6
+var numPlayers = 5
 var numCompanies = 3
 var goldCardNum = Math.min(numPlayers,10)
 var goldCardFile = `card/gold-card-${goldCardNum}`
@@ -79,13 +79,13 @@ const describePortfolio = (x,y,color,player) => {
   descriptions.push(client.describe({file:'board/screen', x:x-360,y:y,type:'screen',rotation:270-angle,player:player}))
   descriptions.push(client.describe({file:'board/screen-box', x:x+360,y:y,type:'board',rotation:angle}))
   descriptions.push(client.describe({file:'board/screen-box', x:x-360,y:y,type:'board',rotation:270-angle}))
-  descriptions = descriptions.concat(describeRow('gold/5',x-500,y-sgn*200,'bit',n=4,length=250))
-  descriptions = descriptions.concat(describeRow('gold/4',x-200,y-sgn*200,'bit',n=4,length=200))
-  descriptions = descriptions.concat(describeRow('gold/3',x-580,y-sgn*060,'bit',n=2,length=090))
-  descriptions = descriptions.concat(describeRow('gold/2',x-420,y-sgn*060,'bit',n=2,length=090))
-  descriptions = descriptions.concat(describeRow('gold/1',x-200,y-sgn*060,'bit',n=4,length=200))
+  descriptions = descriptions.concat(describeRow('gold/2',x-150,y-sgn*060,'bit',n=1,length=000))
+  descriptions = descriptions.concat(describeRow('gold/3',x-280,y-sgn*060,'bit',n=1,length=000))
+  descriptions = descriptions.concat(describeRow('gold/4',x-410,y-sgn*060,'bit',n=1,length=000))
+  descriptions = descriptions.concat(describeRow('gold/5',x-550,y-sgn*060,'bit',n=1,length=000))
+  descriptions = descriptions.concat(describeRow('gold/1',x-350,y-sgn*200,'bit',n=6,length=450))
   descriptions.push(client.describe({file:'board/nametag', x:x,y:y+sgn*430,type:'board'}))
-  descriptions = descriptions.concat(describeRow('gold/bond',x-500,y+sgn*450,'bit',n=3,length=270))
+  descriptions = descriptions.concat(describeRow('gold/bond',x-500,y+sgn*430,'bit',n=2,length=150))
   return(descriptions)
 } 
 
@@ -108,14 +108,9 @@ const describeBank = (x,y) => {
 
 const describeBonds = (x,y) => {
   var descriptions = []
-  descriptions.push(client.describe({file:'gold/bond',  x:x,y:y,type:'bit',clones:100}))
-  /*
-  L = 200*(numPlayers-1)
-  descriptions = descriptions.concat(describeColumn('gold/bond',x-210,y,type='bit',n=numPlayers,length=L,clones=0))
-  descriptions = descriptions.concat(describeColumn('gold/bond',x-70,y,type='bit',n=numPlayers,length=L,clones=0))
-  descriptions = descriptions.concat(describeColumn('gold/bond',x+70,y,type='bit',n=numPlayers,length=L,clones=0))
-  descriptions = descriptions.concat(describeColumn('gold/bond',x+210,y,type='bit',n=numPlayers,length=L,clones=0))
-  */
+  descriptions = descriptions.concat(describeColumn('gold/bond',x-150,y,type='bit',n=6,length=800,clones=numPlayers))
+  descriptions = descriptions.concat(describeColumn('gold/bond',x-000,y,type='bit',n=6,length=800,clones=numPlayers))
+  descriptions = descriptions.concat(describeColumn('gold/bond',x+150,y,type='bit',n=6,length=800,clones=numPlayers))
   return(descriptions)
 }
 
@@ -123,7 +118,9 @@ const describeCompany = (x,y,letter='a') => {
   var descriptions = []
   cardName = 'card/stock-'+letter
   unitName = 'unit/'+letter
-  descriptions = descriptions.concat(describeRow(cardName,x,y,type='card',n=150,length=0))
+  descriptions = descriptions.concat(describeRow(cardName,x-150,y,type='card',n=5*numPlayers,length=0))
+  descriptions = descriptions.concat(describeRow(cardName,x+000,y,type='card',n=5*numPlayers,length=0))
+  descriptions = descriptions.concat(describeRow(cardName,x+150,y,type='card',n=5*numPlayers,length=0))
   descriptions = descriptions.concat(describeRow(unitName,x,y+230,'bit',n=5,length=350))
   descriptions = descriptions.concat(describeRow(unitName,x,y+380,'bit',n=5,length=350))
   return(descriptions)
@@ -156,7 +153,6 @@ const setup = message => {
   let descriptions = []
   descriptions = descriptions.concat(client.describe({file:'board/map',x:0,y:0,type:'board'}))
   descriptions = descriptions.concat(client.describe({file:'card/stock-a',x:120,y:420,type:'card'}))
-  //descriptions = descriptions.concat(client.describe({file:'unit/empress',x:405,y:405,type:'bit'}))
   A = 900
   B = -780
   C = 600
@@ -164,7 +160,7 @@ const setup = message => {
   descriptions = descriptions.concat(describeCompany(A,B+1*C,'b'))
   descriptions = descriptions.concat(describeCompany(A,B+2*C,'c'))
   descriptions = descriptions.concat(describeBank(1500,0))
-  //descriptions = descriptions.concat(describeBonds(-1550,0))
+  descriptions = descriptions.concat(describeBonds(-1550,0))
   origins.map((origin,i) => { 
     x = origin[0]
     y = origin[1]
