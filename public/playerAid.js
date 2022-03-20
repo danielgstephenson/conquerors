@@ -43,7 +43,7 @@ playerAidDivContent.innerHTML = `
     <li>Highest bidders pay 1 gold</li>
     <li>Start the next round</li>
   </ul>
-  <li>Middle bidders take stock from company and pay own bid</li>
+  <li>Middle bidders take stock from company</li>
   <li>Highest bidder either places a unit or moves a unit</li>
   <ul>
     <li>Place units or prisoners from the active company</li>
@@ -56,8 +56,8 @@ playerAidDivContent.innerHTML = `
     <li>If units are captured, everyone takes 1 bond</li>
   </ul>
   <li>Retreat: Active company's surrounded units go to trash</li>
-  <li>Highest bidder takes stock from market and pays own bid</li>
-  <li>All but the lowest bidders pay the lowest bid</li>
+  <li>Highest bidder takes stock from market</li>
+  <li>All but the lowest bidders pay their own bid</li>
   <li>Then, the game ends if any company has</li>
   <ul>
     <li>10 power</li>
