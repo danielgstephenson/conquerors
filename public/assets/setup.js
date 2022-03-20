@@ -85,7 +85,7 @@ const describePortfolio = (x,y,color,player) => {
   descriptions = descriptions.concat(describeRow('gold/5',x-550,y-sgn*060,'bit',n=1,length=000))
   descriptions = descriptions.concat(describeRow('gold/1',x-350,y-sgn*200,'bit',n=6,length=450))
   descriptions.push(client.describe({file:'board/nametag', x:x,y:y+sgn*430,type:'board'}))
-  descriptions = descriptions.concat(describeRow('gold/bond',x-500,y+sgn*430,'bit',n=2,length=150))
+  descriptions = descriptions.concat(describeRow('gold/bond',x-520,y+sgn*430,'bit',n=4,length=350))
   return(descriptions)
 } 
 
@@ -96,9 +96,6 @@ const describeBank = (x,y) => {
   descriptions = descriptions.concat(describeRow('gold/3',x,y-340,type='bit',n=3,length=310,clones=10))
   descriptions = descriptions.concat(describeRow('gold/4',x,y-170,type='bit',n=3,length=320,clones=10))
   descriptions = descriptions.concat(describeRow('gold/5',x,y-000,type='bit',n=3,length=320,clones=10))
-  //bondsPerPlayer = 5
-  //bondClones = numPlayers*(bondsPerPlayer-1)-1
-  //descriptions = descriptions.concat(describeRow('gold/bond',x,y-000,type='bit',n=1,length=000,clones=bondClones))
   descriptions = descriptions.concat(describeRow('gold/4',x,y+170,type='bit',n=3,length=320,clones=10))
   descriptions = descriptions.concat(describeRow('gold/3',x,y+340,type='bit',n=3,length=310,clones=10))
   descriptions = descriptions.concat(describeRow('gold/2',x,y+500,type='bit',n=3,length=300,clones=10))

@@ -43,7 +43,7 @@ playerAidDivContent.innerHTML = `
     <li>Highest bidders pay 1 gold</li>
     <li>Start the next round</li>
   </ul>
-  <li>Middle bidders take stock from company and pay lowest bid</li>
+  <li>Middle bidders take stock from company and pay own bid</li>
   <li>Highest bidder either places a unit or moves a unit</li>
   <ul>
     <li>Place units or prisoners from the active company</li>
