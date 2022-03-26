@@ -115,11 +115,13 @@ const describeCompany = (x,y,letter='a') => {
   var descriptions = []
   cardName = 'card/stock-'+letter
   unitName = 'unit/'+letter
+  palaceName = 'unit/palace-'+letter
   descriptions = descriptions.concat(describeRow(cardName,x-150,y,type='card',n=5*numPlayers,length=0))
   descriptions = descriptions.concat(describeRow(cardName,x+000,y,type='card',n=5*numPlayers,length=0))
   descriptions = descriptions.concat(describeRow(cardName,x+150,y,type='card',n=5*numPlayers,length=0))
   descriptions = descriptions.concat(describeRow(unitName,x,y+230,'bit',n=5,length=350))
-  descriptions = descriptions.concat(describeRow(unitName,x,y+380,'bit',n=5,length=350))
+  descriptions = descriptions.concat(describeRow(unitName,x-50,y+380,'bit',n=4,length=270))
+  descriptions = descriptions.concat(client.describe({file:palaceName,x:x+180,y:y+380,type:'bit'}))
   return(descriptions)
 }
 

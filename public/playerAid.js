@@ -44,16 +44,16 @@ playerAidDivContent.innerHTML = `
     <li>Start the next round</li>
   </ul>
   <li>Middle bidders take stock from company</li>
-  <li>Highest bidder either places a unit or moves a unit</li>
+  <li>Highest bidder places a unit, prisoner, or palace</li>
   <ul>
-    <li>Place units or prisoners from the active company</li>
-    <li>If you move a unit, trash 1 unit from the active company</li>
-    <li>Move to neighboring locations: land to land or sea to sea</li>
+    <li>Place units or prisoners from the active company anywhere</li>
+    <li>Place a palace from the active company on land</li>
   </ul>
   <li>A group is surrounded if it does not neighbor any open node</li>
   <li>Attack: Active company takes surrounded units prisoner</li>
   <ul>
     <li>If units are captured, everyone takes 1 bond</li>
+    <li>Palaces always stay on the map</li>
   </ul>
   <li>Retreat: Active company's surrounded units go to trash</li>
   <li>Highest bidder takes stock from market</li>
