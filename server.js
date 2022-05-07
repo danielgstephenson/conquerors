@@ -14,6 +14,8 @@ if (config.secure) {
 const server = config.secure ? https.createServer(options, app) : http.Server(app)
 const io = config.secure ? socketIo(server, options) : socketIo(server)
 
+console.log(`config.secure = ${config.secure}`)
+
 app.use(express.static(path.join(__dirname, 'public')))
 const state = []
 let events = {}
