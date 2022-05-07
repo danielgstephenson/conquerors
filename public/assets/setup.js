@@ -41,23 +41,25 @@ const describePortfolio = (x, y, color, player) => {
   const sgn = Math.sign(y)
   const angle = sgn === 1 ? 0 : 90
   descriptions = []
-  const W = 300
-  const L = 350 - W / 2
-  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-a', x: x + L + 0 / 2 * W, y: y + sgn * 200, type: 'card' }))
-  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-b', x: x + L + 1 / 2 * W, y: y + sgn * 200, type: 'card' }))
-  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-c', x: x + L + 2 / 2 * W, y: y + sgn * 200, type: 'card' }))
-  descriptions.push(window.client.describe({ file: 'board/ready', x: x, y: y - sgn * 400, type: 'screen', player: player }))
-  descriptions.push(window.client.describe({ file: 'board/screen', x: x + 360, y: y, type: 'screen', rotation: angle, player: player }))
-  descriptions.push(window.client.describe({ file: 'board/screen', x: x - 360, y: y, type: 'screen', rotation: 270 - angle, player: player }))
-  descriptions.push(window.client.describe({ file: 'board/screen-box', x: x + 360, y: y, type: 'board', rotation: angle }))
-  descriptions.push(window.client.describe({ file: 'board/screen-box', x: x - 360, y: y, type: 'board', rotation: 270 - angle }))
-  descriptions = descriptions.concat(describeRow('gold/2', x - 150, y - sgn * 60, 'bit', 1, 0))
-  descriptions = descriptions.concat(describeRow('gold/3', x - 280, y - sgn * 60, 'bit', 1, 0))
-  descriptions = descriptions.concat(describeRow('gold/4', x - 410, y - sgn * 60, 'bit', 1, 0))
-  descriptions = descriptions.concat(describeRow('gold/5', x - 550, y - sgn * 60, 'bit', 1, 0))
-  descriptions = descriptions.concat(describeRow('gold/1', x - 350, y - sgn * 200, 'bit', 6, 450))
-  descriptions.push(window.client.describe({ file: 'board/nametag', x: x, y: y + sgn * 430, type: 'board' }))
-  descriptions = descriptions.concat(describeRow('gold/bond', x - 520, y + sgn * 430, 'bit', 4, 350))
+  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-a', x: x - 600, y: y + sgn * 290, type: 'card' }))
+  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-b', x: x - 400, y: y + sgn * 290, type: 'card' }))
+  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-c', x: x - 200, y: y + sgn * 290, type: 'card' }))
+  descriptions.push(window.client.describe({ file: 'board/screen', x: x + 420, y: y, type: 'screen', rotation: angle, player: player }))
+  descriptions.push(window.client.describe({ file: 'board/screen', x: x - 420, y: y, type: 'screen', rotation: 270 - angle, player: player }))
+  descriptions.push(window.client.describe({ file: 'board/nametag', x: x, y: y + sgn * 490, type: 'board' }))
+  descriptions.push(window.client.describe({ file: 'board/ready', x: x, y: y + sgn * 610, type: 'screen', player: player }))
+  descriptions = descriptions.concat(describeRow('gold/1', x - 400, y - sgn * 280, 'bit', 6, 450))
+  descriptions = descriptions.concat(describeRow('gold/5', x - 600, y - sgn * 150, 'bit', 1, 0))
+  descriptions = descriptions.concat(describeRow('gold/4', x - 460, y - sgn * 150, 'bit', 1, 0))
+  descriptions = descriptions.concat(describeRow('gold/3', x - 330, y - sgn * 150, 'bit', 1, 0))
+  descriptions = descriptions.concat(describeRow('gold/2', x - 205, y - sgn * 150, 'bit', 1, 0))
+  descriptions = descriptions.concat(describeRow('gold/bond', x - 560, y + sgn * 500, 'bit', 4, 350))
+  window.range(8).forEach(i => {
+    descriptions.push(window.client.describe({ file: `card/location-col-${i + 1}`, x: x - 740 + i * 90, y: y - sgn * 10, type: 'bit' }))
+  })
+  window.range(8).forEach(i => {
+    descriptions.push(window.client.describe({ file: `card/location-row-${i + 1}`, x: x - 740 + i * 90, y: y + sgn * 100, type: 'bit' }))
+  })
   return (descriptions)
 }
 

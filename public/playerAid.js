@@ -1,35 +1,34 @@
-playerAidDiv = document.getElementById("playerAidDiv")
-playerAidDivContent = document.getElementById("playerAidDivContent")
+playerAidDiv = document.getElementById('playerAidDiv')
+playerAidDivContent = document.getElementById('playerAidDivContent')
 
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    x1 = e.clientX;
-    y1 = e.clientY;
-    document.onmouseup = closeDragElement;
-    document.onmousemove = elementDrag;
+function dragElement (elmnt) {
+  const pos1 = 0; const pos2 = 0; const pos3 = 0; const pos4 = 0
+  document.getElementById(elmnt.id + 'Header').onmousedown = dragMouseDown
+  function dragMouseDown (e) {
+    e = e || window.event
+    e.preventDefault()
+    x1 = e.clientX
+    y1 = e.clientY
+    document.onmouseup = closeDragElement
+    document.onmousemove = elementDrag
   }
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    x2 = x1 - e.clientX;
-    y2 = y1 - e.clientY;
-    x1 = e.clientX;
-    y1 = e.clientY;
-    elmnt.style.top = (elmnt.offsetTop - y2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - x2) + "px";
+  function elementDrag (e) {
+    e = e || window.event
+    e.preventDefault()
+    x2 = x1 - e.clientX
+    y2 = y1 - e.clientY
+    x1 = e.clientX
+    y1 = e.clientY
+    elmnt.style.top = (elmnt.offsetTop - y2) + 'px'
+    elmnt.style.left = (elmnt.offsetLeft - x2) + 'px'
   }
-  function closeDragElement() {
-    document.onmouseup = null;
-    document.onmousemove = null;
+  function closeDragElement () {
+    document.onmouseup = null
+    document.onmousemove = null
   }
 }
 
-dragElement(playerAidDiv);
-
+dragElement(playerAidDiv)
 
 playerAidDivContent.innerHTML = `
 <ul>
@@ -44,10 +43,11 @@ playerAidDivContent.innerHTML = `
     <li>Start the next round</li>
   </ul>
   <li>Middle bidders take stock from company</li>
-  <li>Highest bidder places a unit, prisoner, or palace</li>
-  <ul>
-    <li>Place units or prisoners from the active company anywhere</li>
-    <li>Place a palace from the active company on land</li>
+  <li>Highest bidder places a unit</li>
+  <ul>  
+    <li>Place a unit or palace on the selected location</li>
+    <li>Palaces can only be placed on land</li>
+    <li>If the selected location is occupied, trash a unit</li>
   </ul>
   <li>A group is surrounded if it does not neighbor any open node</li>
   <li>Attack: Active company takes surrounded units prisoner</li>

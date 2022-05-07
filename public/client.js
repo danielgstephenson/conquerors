@@ -258,10 +258,10 @@ window.client = (() => {
       component.stop()
       component.animate({ transform: update.local }, 400)
       if (handlers.update) handlers.update(update)
-      if (update.side == 'facedown') setSide(component, 'facedown')
-      if (update.side == 'hidden') setSide(component, 'back')
-      if (update.side == 'front') setSide(component, 'front')
-      if (component.data('file') == 'board/nametag') {
+      if (update.side === 'facedown') setSide(component, 'facedown')
+      if (update.side === 'hidden') setSide(component, 'back')
+      if (update.side === 'front') setSide(component, 'front')
+      if (component.data('file') === 'board/nametag') {
         const children = component.children()
         const textbox = children[children.length - 1]
         textbox.attr({ text: update.text })
