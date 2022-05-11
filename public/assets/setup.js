@@ -53,7 +53,7 @@ const describePortfolio = (x, y, color, player) => {
   descriptions = descriptions.concat(describeRow('gold/4', x - 460, y - sgn * 180, 'bit', 1, 0))
   descriptions = descriptions.concat(describeRow('gold/3', x - 330, y - sgn * 180, 'bit', 1, 0))
   descriptions = descriptions.concat(describeRow('gold/2', x - 205, y - sgn * 180, 'bit', 1, 0))
-  descriptions = descriptions.concat(describeRow('gold/bond', x - 560, y + sgn * 500, 'bit', 5, 350))
+  descriptions = descriptions.concat(describeRow('gold/bond', x - 580, y + sgn * 500, 'bit', 5, 450))
   window.range(8).forEach(i => {
     descriptions.push(window.client.describe({ file: `card/location-col-${i + 1}`, x: x - 740 + i * 90, y: y - sgn * 10, type: 'bit' }))
   })
