@@ -37,17 +37,14 @@ playerAidDivContent.innerHTML = `
   <ul>
     <li>Put one more stock for each more powerful company</li>
   </ul>
-  <li>If there is a tie for the highest bid</li>
+  <li>Everyone secretly selects their bid and location</li>
   <ul>
-    <li>Highest bidders pay 1 gold</li>
-    <li>Start the next round</li>
+    <li>Place bid gold on right</li>
+    <li>Place 1 row card and 1 column card on right/li>
   </ul>
-  <li>Middle bidders take stock from company</li>
-  <li>Highest bidder places a unit</li>
+  <li>Highest bidder places a unit at the selected location</li>
   <ul>  
-    <li>Place a unit or palace on the selected location</li>
-    <li>Palaces can only be placed on land</li>
-    <li>If the selected location is occupied, trash a unit</li>
+    <li>If the location is occupied or there is tie, trash a unit</li>
   </ul>
   <li>A group is surrounded if it does not neighbor any open node</li>
   <li>Attack: Active company takes surrounded units prisoner</li>
@@ -56,8 +53,7 @@ playerAidDivContent.innerHTML = `
     <li>Palaces always stay on the map</li>
   </ul>
   <li>Retreat: Active company's surrounded units go to trash</li>
-  <li>Highest bidder takes stock from market</li>
-  <li>All but the lowest bidders pay their own bid</li>
+  <li>All but lowest bidders pay bid and take stock</li>
   <li>Then, the game ends if any company has</li>
   <ul>
     <li>10 power</li>
