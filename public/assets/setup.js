@@ -89,13 +89,11 @@ const describeCompany = (x, y, letter = 'a') => {
   let descriptions = []
   const cardName = 'card/stock-' + letter
   const unitName = 'unit/' + letter
-  const palaceName = 'unit/palace-' + letter
   descriptions = descriptions.concat(describeRow(cardName, x - 150, y, 'card', 5 * numPlayers, 0))
   descriptions = descriptions.concat(describeRow(cardName, x + 0, y, 'card', 5 * numPlayers, 0))
   descriptions = descriptions.concat(describeRow(cardName, x + 150, y, 'card', 5 * numPlayers, 0))
   descriptions = descriptions.concat(describeRow(unitName, x, y + 230, 'bit', 5, 350))
-  descriptions = descriptions.concat(describeRow(unitName, x - 50, y + 380, 'bit', 4, 270))
-  descriptions = descriptions.concat(window.client.describe({ file: palaceName, x: x + 180, y: y + 380, type: 'bit' }))
+  descriptions = descriptions.concat(describeRow(unitName, x, y + 380, 'bit', 5, 350))
   return (descriptions)
 }
 
