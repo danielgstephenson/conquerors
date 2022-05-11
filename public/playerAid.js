@@ -50,7 +50,6 @@ playerAidDivContent.innerHTML = `
   <li>Attack: Active company takes surrounded units prisoner</li>
   <ul>
     <li>If units are captured, everyone takes 1 bond</li>
-    <li>Palaces always stay on the map</li>
   </ul>
   <li>Retreat: Active company's surrounded units go to trash</li>
   <li>All but lowest bidders pay bid and take stock</li>
