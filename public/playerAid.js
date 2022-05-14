@@ -40,7 +40,7 @@ playerAidDivContent.innerHTML = `
   <li>Everyone secretly selects their bid and location</li>
   <ul>
     <li>Place bid gold on right</li>
-    <li>Place 1 row card and 1 column card on right/li>
+    <li>Place 1 row card and 1 column card on right</li>
   </ul>
   <li>Highest bidder places a unit at the selected location</li>
   <ul>  
