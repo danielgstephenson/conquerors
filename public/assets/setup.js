@@ -1,4 +1,4 @@
-const numPlayers = 5
+const numPlayers = 3
 let tableWidth = 3500
 if ([2, 4, 5, 6].includes(numPlayers)) tableWidth = 3500
 if ([7, 8].includes(numPlayers)) tableWidth = 4300
