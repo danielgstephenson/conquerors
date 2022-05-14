@@ -58,6 +58,9 @@ playerAidDivContent.innerHTML = `
     <li>10 power</li>
     <li>0 units in reserve (10)</li>
     <li>0 stocks in reserve (15 per player)</li>
+  </ul>
+  <li>Scoring</li>
+  <ul>  
     <li>points per stock = power</li>
     <li>Tie Breaker: Gold</li>
   </ul>
