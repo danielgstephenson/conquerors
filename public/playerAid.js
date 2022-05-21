@@ -1,9 +1,9 @@
-playerAidDiv = document.getElementById('playerAidDiv')
-playerAidDivContent = document.getElementById('playerAidDivContent')
+const playerAidDiv = document.getElementById('playerAidDiv')
+const playerAidDivContent = document.getElementById('playerAidDivContent')
 
 function dragElement (elmnt) {
-  const pos1 = 0; const pos2 = 0; const pos3 = 0; const pos4 = 0
   document.getElementById(elmnt.id + 'Header').onmousedown = dragMouseDown
+  let x1 = 0; let y1 = 0; let x2 = 0; let y2 = 0
   function dragMouseDown (e) {
     e = e || window.event
     e.preventDefault()
@@ -40,7 +40,7 @@ playerAidDivContent.innerHTML = `
   <li>Everyone secretly selects their bid and location</li>
   <ul>
     <li>Place bid gold on right</li>
-    <li>Place 1 row card and 1 column card on right</li>
+    <li>Place 1 row bit and 1 column bit on right</li>
   </ul>
   <li>Highest bidder places a unit at the selected location</li>
   <ul>  

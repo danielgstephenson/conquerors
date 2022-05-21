@@ -28,7 +28,7 @@ app.get('/', (request, response) =>
 
 io.on('connection', async socket => {
   console.log('socket.id =', socket.id)
-  socket.emit('setup', { seed, state })
+  socket.emit('setup', { seed, state, config })
   socket.on('updateServer', msg => {
     if (msg.seed === seed) {
       msg.updates.forEach(update => {

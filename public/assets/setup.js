@@ -1,3 +1,4 @@
+/*
 const numPlayers = 3
 let tableWidth = 3500
 if ([2, 4, 5, 6].includes(numPlayers)) tableWidth = 3500
@@ -18,11 +19,13 @@ window.range(numBottomRowPlayers).forEach(i => {
   bottomRowOrigins.push([x, 1400])
 })
 const origins = topRowOrigins.concat(bottomRowOrigins)
+*/
 
-const shuffle = array => array
-  .map(item => ({ value: item, priority: Math.random() }))
-  .sort((a, b) => a.priority - b.priority)
-  .map(x => x.value)
+const getRowOrigins = (n, y, tableWidth) => window.range(n).map(i => {
+  const alpha = (i + 1) / (n + 1)
+  const x = -tableWidth * alpha + tableWidth * (1 - alpha)
+  return [x, y]
+})
 
 const describeRow = (file, x, y, type, n, length, clones = 0, side = 'front') => window.range(n).map(i => {
   const weight = n > 1 ? i / (n - 1) : 0
@@ -36,7 +39,7 @@ const describeColumn = (file, x, y, type, n, length, clones = 0, side = 'front')
   return window.client.describe({ file, x, y: myY, type, side, clones })
 })
 
-const describePortfolio = (x, y, color, player) => {
+const describePortfolio = (x, y, player) => {
   let descriptions = []
   const sgn = Math.sign(y)
   const angle = sgn === 1 ? 0 : 90
@@ -77,7 +80,7 @@ const describeBank = (x, y) => {
   return (descriptions)
 }
 
-const describeBonds = (x, y) => {
+const describeBonds = (x, y, numPlayers) => {
   let descriptions = []
   descriptions = descriptions.concat(describeColumn('gold/bond', x - 150, y, 'bit', 6, 800, numPlayers))
   descriptions = descriptions.concat(describeColumn('gold/bond', x - 0, y, 'bit', 6, 800, numPlayers))
@@ -85,7 +88,7 @@ const describeBonds = (x, y) => {
   return (descriptions)
 }
 
-const describeCompany = (x, y, letter = 'a') => {
+const describeCompany = (x, y, numPlayers, letter = 'a') => {
   let descriptions = []
   const cardName = 'card/stock-' + letter
   const unitName = 'unit/' + letter
@@ -114,24 +117,28 @@ const compareLayers = (a, b) => {
 }
 
 window.setup = message => {
-  let playerColors = ['purple', 'yellow', 'grey', 'green', 'brown', 'blue', 'orange']
-  playerColors = shuffle(playerColors)
-  playerColors = playerColors.concat(['red', 'pink', 'white'])
+  const numPlayers = message.config.numPlayers
+  const tableWidth = numPlayers < 4 ? 3500 : numPlayers < 9 ? 4000 : 5000
+  const numBottomRowPlayers = Math.round(numPlayers / 2)
+  const numTopRowPlayers = numPlayers - numBottomRowPlayers
+  const topRowOrigins = getRowOrigins(numTopRowPlayers, -1400, tableWidth)
+  const bottomRowOrigins = getRowOrigins(numBottomRowPlayers, 1400, tableWidth)
+  const origins = topRowOrigins.concat(bottomRowOrigins)
   let descriptions = []
   descriptions = descriptions.concat(window.client.describe({ file: 'board/map', x: 0, y: 0, type: 'board' }))
   descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-a', x: 120, y: 420, type: 'card' }))
   const A = 900
   const B = -780
   const C = 600
-  descriptions = descriptions.concat(describeCompany(A, B + 0 * C, 'a'))
-  descriptions = descriptions.concat(describeCompany(A, B + 1 * C, 'b'))
-  descriptions = descriptions.concat(describeCompany(A, B + 2 * C, 'c'))
+  descriptions = descriptions.concat(describeCompany(A, B + 0 * C, numPlayers, 'a'))
+  descriptions = descriptions.concat(describeCompany(A, B + 1 * C, numPlayers, 'b'))
+  descriptions = descriptions.concat(describeCompany(A, B + 2 * C, numPlayers, 'c'))
   descriptions = descriptions.concat(describeBank(1500, 0))
-  descriptions = descriptions.concat(describeBonds(-1550, 0))
+  descriptions = descriptions.concat(describeBonds(-1550, 0, numPlayers))
   origins.forEach((origin, i) => {
     const x = origin[0]
     const y = origin[1]
-    const portfolio = describePortfolio(x, y, playerColors[i], i + 1)
+    const portfolio = describePortfolio(x, y, i + 1)
     descriptions = descriptions.concat(portfolio)
   })
   console.log(descriptions)

@@ -1,3 +1,4 @@
 {
-    "secure": false
+    "secure": false,
+    "numPlayers": 6
 }
