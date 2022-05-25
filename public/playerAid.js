@@ -33,36 +33,30 @@ dragElement(playerAidDiv)
 playerAidDivContent.innerHTML = `
 <ol>
   <li>Everyone takes 1 gold for each of their bonds</li>
-  <li>Put 1 active stock in the market.</li>
-  <ul>
-    <li>Put one more stock for each more powerful company</li>
-  </ul>
-  <li>Everyone secretly selects their bid and location</li>
-  <ul>
-    <li>Place bid gold on right</li>
-    <li>Place 1 row bit and 1 column bit on right</li>
-  </ul>
-  <li>Highest bidder places a unit at the selected location</li>
-  <ul>  
-    <li>If the location is occupied or there is tie, trash a unit</li>
-  </ul>
+  <li>Put 1 active stock in the market</li>
+  <li>Put 1 more stock for each more powerful company</li>
+  <li>Everyone secretly selects 1 row card and 1 column card</li>
+  <li>Everyone secretly selects their bid</li>
+  <li>Everyone reveals all their selections</li>
+  <li>If the location is occupied or there is tie, trash an unplaced unit</li>
+  <li>Otherwise, highest bidder places a unit at the selected location</li>
   <li>A group is surrounded if it does not neighbor any open node</li>
-  <li>Attack: Active company takes surrounded units prisoner</li>
-  <ul>
-    <li>If units are captured, everyone takes 1 bond</li>
-  </ul>
-  <li>Retreat: Active company's surrounded units go to trash</li>
-  <li>All but lowest bidders pay bid and take stock</li>
-  <li>Then, the game ends if any company has</li>
+  <li>Attack: Active company captures surrounded enemy units</li>
+  <li>If units are captured, everyone takes 1 bond</li>
+  <li>Retreat: Active company's surrounded units retreat to trash</li>
+  <li>Middle bidders take 1 stock from deck for each in market</li>
+  <li>Highest bidder takes all stock in market</li>
+  <li>All but lowest bidders pay bid</li>
+  <li>The game ends if any company has:</li>
   <ul>
     <li>10 power</li>
     <li>0 units in reserve (10)</li>
     <li>0 stocks in reserve (15 per player)</li>
   </ul>
   <li>Scoring</li>
-  <ul>  
-    <li>points per stock = power</li>
-    <li>Tie Breaker: Gold</li>
+  <ul>
+    <li>1 point per power per stock</li>
+    <li>Tie breaker is most gold</li>
   </ul>
-</ul>
+</ol>
 `

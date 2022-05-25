@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="1.290161in"
-   height="1.3101524in"
-   viewBox="0 0 116.11449 117.91371"
+   width="1.207in"
+   height="1.6756332in"
+   viewBox="0 0 108.63 150.80698"
    id="svg2"
    version="1.1"
    inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
@@ -24,10 +24,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6245779"
-     inkscape:cx="-44.626977"
-     inkscape:cy="19.08188"
+     inkscape:cx="-53.860144"
+     inkscape:cy="60.323362"
      inkscape:document-units="in"
-     inkscape:current-layer="g22"
+     inkscape:current-layer="g57"
      showgrid="true"
      units="in"
      inkscape:showpageshadow="false"
@@ -67,7 +67,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-3.0675855,-986.47063)">
+     transform="translate(-11.662272,-947.99977)">
     <g
        id="g22"
        transform="matrix(0.7,0,0,0.7,15,300.70865)">
@@ -76,20 +76,16 @@
          transform="matrix(1.4950958,0,0,1.4950958,133.82424,-394.45363)">
         <rect
            ry="32.951099"
-           y="922.69244"
-           x="-97.298477"
-           height="105.44351"
-           width="103.72434"
-           id="rect851"
-           style="opacity:1;fill:#ececec;fill-opacity:1;stroke:#000000;stroke-width:7.22362;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
-        <g
-           aria-label="7"
-           id="text2037"
-           style="font-size:76.4404px;line-height:1.25;stroke-width:0.895786">
-          <path
-             d="m -27.072696,956.04276 -25.156654,47.25274 h -7.987425 l 26.761605,-49.04431 h -31.651103 v -6.53177 h 38.033577 z"
-             id="path827" />
-        </g>
+           y="885.93335"
+           x="-89.086212"
+           height="136.8732"
+           id="rect851-5"
+           style="fill:#ececec;fill-opacity:1;stroke:#000000;stroke-width:7.22362;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+           width="96.572884" />
+        <path
+           d="m -21.78298,934.90525 -25.15665,47.25274 h -7.98743 l 26.76161,-49.04431 h -31.65111 v -6.53177 h 38.03358 z"
+           id="path827"
+           style="font-size:76.4404px;line-height:1.25;stroke-width:0.895786" />
       </g>
     </g>
   </g>

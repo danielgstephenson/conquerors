@@ -3,7 +3,7 @@
 window.range = n => [...Array(n).keys()]
 
 window.client = (() => {
-  const paper = Snap(window.innerWidth, window.innerHeight)
+  const paper = window.Snap(window.innerWidth, window.innerHeight)
   const group = paper.group()
 
   const socket = io({ transports: ['websocket'], upgrade: false })
@@ -13,48 +13,44 @@ window.client = (() => {
   const hiddens = []
   const facedowns = []
   const handlers = {}
-  const hands = {}
-
-  const panning = false
   let seed = null
-  const restartNeeded = false
 
   const unique = arr => {
-    const u = {}
-    return arr.filter(v => u[v] = (v !== undefined && !u.hasOwnProperty(v)))
+    const s = new Set(arr)
+    return [...s]
   }
 
   // Disable Right Click Menu
   document.oncontextmenu = () => false
 
   // Setup Zoom-Pan-Drag
-  paperError = (error, paper) => {
-    // console.log(error,paper)
+  const paperError = (error, paper) => {
+    if (error) console.error(error, paper)
   }
   paper.zpd({ zoom: true, pan: false, drag: false }, paperError)
-  paper.zoomTo(0.1, 1000, null, function (err) {
+  paper.zoomTo(0.2, 200, null, function (err) {
     if (err) console.error(err)
-    else console.log('zoom complete')
-    paper.panTo(1000, 500, 500, null, function (err) {
+    else console.warn('zoom complete')
+    paper.panTo(800, 500, 200, null, function (err) {
       if (err) console.error(err)
-      else console.log('pan complete')
+      else console.warn('pan complete')
     })
   })
 
   paper.mousedown(event => {
-    if (event.button == 2) paper.zpd({ pan: true }, paperError)
+    if (event.button === 2) paper.zpd({ pan: true }, paperError)
   })
 
   paper.mouseup(event => {
-    if (event.button == 2) paper.zpd({ pan: false }, paperError)
+    if (event.button === 2) paper.zpd({ pan: false }, paperError)
   })
 
-  setSide = function (component, side) {
-    hidden = hiddens[component.data('hiddenId')]
-    back = backs[component.data('backId')]
-    facedown = facedowns[component.data('facedownId')]
+  window.setSide = function (component, side) {
+    const hidden = hiddens[component.data('hiddenId')]
+    const back = backs[component.data('backId')]
+    const facedown = facedowns[component.data('facedownId')]
     console.log('setSide', side)
-    if (side == 'hidden') {
+    if (side === 'hidden') {
       back.attr({ opacity: 0 })
       hidden.attr({ opacity: 1 })
       facedown.attr({ opacity: 0 })
@@ -63,7 +59,7 @@ window.client = (() => {
       facedown.node.style.display = 'none'
       component.data('side', 'hidden')
     }
-    if (side == 'front') {
+    if (side === 'front') {
       back.attr({ opacity: 0 })
       hidden.attr({ opacity: 0 })
       facedown.attr({ opacity: 0 })
@@ -72,7 +68,7 @@ window.client = (() => {
       facedown.node.style.display = 'none'
       component.data('side', 'front')
     }
-    if (side == 'back') {
+    if (side === 'back') {
       back.attr({ opacity: 1 })
       hidden.attr({ opacity: 0 })
       facedown.attr({ opacity: 0 })
@@ -81,7 +77,7 @@ window.client = (() => {
       facedown.node.style.display = 'none'
       component.data('side', 'back')
     }
-    if (side == 'facedown') {
+    if (side === 'facedown') {
       back.attr({ opacity: 0 })
       hidden.attr({ opacity: 0 })
       facedown.attr({ opacity: 1 })
@@ -92,14 +88,14 @@ window.client = (() => {
     }
   }
 
-  flipComponent = function (component) {
+  window.flipComponent = function (component) {
     console.log('flip')
     const oldside = component.data('side')
     console.log('oldSide = ' + oldside)
-    if (oldside == 'back') setSide(component, 'front')
-    if (oldside == 'facedown') setSide(component, 'front')
-    if (oldside == 'front') setSide(component, 'hidden')
-    if (oldside == 'hidden') setSide(component, 'front')
+    if (oldside === 'back') window.setSide(component, 'front')
+    if (oldside === 'facedown') window.setSide(component, 'hidden')
+    if (oldside === 'front') window.setSide(component, 'hidden')
+    if (oldside === 'hidden') window.setSide(component, 'front')
     console.log('newSide = ' + component.data('side'))
     component.data('moved', true)
   }
@@ -124,7 +120,7 @@ window.client = (() => {
     const { x, y, rotation, type, clones, file, details, side, player } = description
     const template = templates[file]
     const startMatrix = template.transform().localMatrix.translate(x, y)
-    for (i = 0; i <= clones; i++) {
+    window.range(clones + 1).forEach(i => {
       const component = template.clone()
       group.add(component)
       component.node.style.display = 'block'
@@ -138,24 +134,51 @@ window.client = (() => {
       component.data('details', details)
       component.data('twoSided', false)
       component.data('player', player)
-      twoSided = false
-      if (type == 'card') {
-        hidden = templates['card/hidden'].clone()
-        facedown = templates['card/facedown'].clone()
-        back = templates['card/back'].clone()
+      let twoSided = false
+      let hidden, facedown, back
+      if (type === 'card') {
+        hidden = templates['card/card-hidden'].clone()
+        if (file.substr(0, 17) === 'card/location-col') {
+          facedown = templates['card/location-col-back'].clone()
+          back = templates['card/location-col-back'].clone()
+        } else if (file.substr(0, 17) === 'card/location-row') {
+          facedown = templates['card/location-row-back'].clone()
+          back = templates['card/location-row-back'].clone()
+        } else {
+          facedown = templates['card/card-back'].clone()
+          back = templates['card/card-back'].clone()
+        }
         twoSided = true
       }
-      if (file == 'board/nametag') {
+      if (file === 'board/nametag') {
         const textbox = component.text(component.getBBox().width / 2, 760, 'Name Tag')
         textbox.attr({ 'font-size': 100, 'text-anchor': 'middle' })
       }
-      if (file == 'board/screen') {
-        hidden = templates['board/screen-hidden'].clone()
-        facedown = templates['board/screen-facedown'].clone()
-        back = templates['board/screen-back'].clone()
+      if (file === 'board/screen-bottom-left') {
+        hidden = templates['board/screen-bottom-left-hidden'].clone()
+        facedown = templates['board/screen-bottom-left-back'].clone()
+        back = templates['board/screen-bottom-left-back'].clone()
         twoSided = true
       }
-      if (file == 'board/ready') {
+      if (file === 'board/screen-bottom-right') {
+        hidden = templates['board/screen-bottom-right-hidden'].clone()
+        facedown = templates['board/screen-bottom-right-back'].clone()
+        back = templates['board/screen-bottom-right-back'].clone()
+        twoSided = true
+      }
+      if (file === 'board/screen-top-left') {
+        hidden = templates['board/screen-top-left-hidden'].clone()
+        facedown = templates['board/screen-top-left-back'].clone()
+        back = templates['board/screen-top-left-back'].clone()
+        twoSided = true
+      }
+      if (file === 'board/screen-top-right') {
+        hidden = templates['board/screen-top-right-hidden'].clone()
+        facedown = templates['board/screen-top-right-back'].clone()
+        back = templates['board/screen-top-right-back'].clone()
+        twoSided = true
+      }
+      if (file === 'board/ready') {
         hidden = templates['board/ready-back'].clone()
         facedown = templates['board/ready-back'].clone()
         back = templates['board/ready-back'].clone()
@@ -172,7 +195,7 @@ window.client = (() => {
         component.append(hidden)
         hidden.node.style.display = 'none'
         hidden.attr({ opacity: 0 })
-        hidden.transform('')
+        hidden.transform('t0,0')
 
         facedowns.push(facedown)
         component.data('facedownId', facedowns.length - 1)
@@ -192,9 +215,11 @@ window.client = (() => {
         back.attr({ opacity: 0 })
         back.transform('')
 
-        if (side == 'facedown') setSide(component, 'facedown')
+        if (side === 'facedown') window.setSide(component, 'facedown')
+        if (side === 'hidden') window.setSide(component, 'hidden')
+        if (side === 'back') window.setSide(component, 'back')
       }
-    }
+    })
   }
 
   const setupTemplate = (file, descriptions, updates, numTemplates) => fragment => {
@@ -211,12 +236,16 @@ window.client = (() => {
   const start = (descriptions, updates) => {
     let files = unique(descriptions.map(item => item.file))
     const backFiles = [
-      'card/back', 'card/hidden', 'card/facedown',
-      'board/screen-back', 'board/screen-hidden', 'board/screen-facedown',
+      'card/card-back', 'card/card-hidden',
+      'card/location-row-back', 'card/location-col-back',
+      'board/screen-bottom-left-back', 'board/screen-bottom-left-hidden',
+      'board/screen-bottom-right-back', 'board/screen-bottom-right-hidden',
+      'board/screen-top-left-back', 'board/screen-top-left-hidden',
+      'board/screen-top-right-back', 'board/screen-top-right-hidden',
       'board/ready-back'
     ]
     files = files.concat(backFiles)
-    files.map(file => Snap.load(`assets/${file}.svg`, setupTemplate(file, descriptions, updates, files.length)))
+    files.map(file => window.Snap.load(`assets/${file}.svg`, setupTemplate(file, descriptions, updates, files.length)))
   }
 
   const describe = options => {
@@ -228,7 +257,7 @@ window.client = (() => {
 
   const updateServer = () => {
     const msg = { updates: [], seed: seed }
-    components.map(component => {
+    components.forEach(component => {
       if (component.data('moved')) {
         const bitUpdate = {
           id: component.data('id'),
@@ -236,7 +265,7 @@ window.client = (() => {
           local: component.transform().local,
           text: ''
         }
-        if (component.data('file') == 'board/nametag') {
+        if (component.data('file') === 'board/nametag') {
           const children = component.children()
           const textbox = children[children.length - 1]
           bitUpdate.text = textbox.attr('text')
@@ -253,20 +282,18 @@ window.client = (() => {
 
   const processUpdate = update => {
     if (update) {
-      console.log(update)
       const component = components[update.id]
       component.stop()
       component.animate({ transform: update.local }, 400)
       if (handlers.update) handlers.update(update)
-      if (update.side === 'facedown') setSide(component, 'facedown')
-      if (update.side === 'hidden') setSide(component, 'back')
-      if (update.side === 'front') setSide(component, 'front')
+      if (update.side === 'facedown') window.setSide(component, 'facedown')
+      if (update.side === 'hidden') window.setSide(component, 'back')
+      if (update.side === 'front') window.setSide(component, 'front')
       if (component.data('file') === 'board/nametag') {
         const children = component.children()
         const textbox = children[children.length - 1]
         textbox.attr({ text: update.text })
       }
-      console.log(update)
     }
   }
 
