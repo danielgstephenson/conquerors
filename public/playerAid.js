@@ -46,7 +46,7 @@ playerAidDivContent.innerHTML = `
   <li>Retreat: Active company's surrounded units retreat to trash</li>
   <li>Middle bidders take 1 stock from deck for each in market</li>
   <li>Highest bidder takes all stock in market</li>
-  <li>All but lowest bidders pay bid</li>
+  <li>All but lowest bidders pay their own bid</li>
   <li>The game ends if any company has:</li>
   <ul>
     <li>10 power</li>
