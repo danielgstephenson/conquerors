@@ -37,14 +37,14 @@ const describePortfolio = (x, y, player) => {
   descriptions = descriptions.concat(describeRow('gold/5', x + 620, y + sgn * 180, 'bit', 1, 0))
   descriptions = descriptions.concat(describeRow('gold/bond', x - 580, y + sgn * 500, 'bit', 3, 300))
   window.range(8).forEach(i => {
-    descriptions.push(window.client.describe({ file: `card/location-col-${i + 1}`, x: x - 740 + i * 90, y: y - sgn * 10, type: 'card', side: 'hidden' }))
+    descriptions.push(window.client.describe({ file: `card/location-col-${i + 1}`, x: x - 740 + i * 90, y: y - sgn * 10, type: 'card' }))
   })
   window.range(8).forEach(i => {
-    descriptions.push(window.client.describe({ file: `card/location-row-${i + 1}`, x: x - 740 + i * 90, y: y + sgn * 120, type: 'card', side: 'hidden' }))
+    descriptions.push(window.client.describe({ file: `card/location-row-${i + 1}`, x: x - 740 + i * 90, y: y + sgn * 120, type: 'card' }))
   })
-  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-a', x: x - 600, y: y + sgn * 290, type: 'card', side: 'hidden' }))
-  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-b', x: x - 400, y: y + sgn * 290, type: 'card', side: 'hidden' }))
-  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-c', x: x - 200, y: y + sgn * 290, type: 'card', side: 'hidden' }))
+  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-a', x: x - 600, y: y + sgn * 290, type: 'card' }))
+  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-b', x: x - 400, y: y + sgn * 290, type: 'card' }))
+  descriptions = descriptions.concat(window.client.describe({ file: 'card/stock-c', x: x - 200, y: y + sgn * 290, type: 'card' }))
   return (descriptions)
 }
 
